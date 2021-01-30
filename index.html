@@ -41,7 +41,7 @@
             <div class="inputs">
                 <div class="input-group">
                     <label" for="">Departure</label>
-                    <input class="inp-style" type="date" name="">
+                        <input class="inp-style" type="date" name="">
                 </div>
                 <div class="input-group">
                     <label for="">Return</label>
@@ -55,17 +55,19 @@
                     <input class="inp-style inp-width" type="number" name="" id="firstClassTicketNumbers">
                 </div>
                 <div class="plus-minus-btn">
-                    <p> <span id="incrementTicketNumberOfFirstClass">+</span> <span class="decrementTicketNumberOfFirstClass">-</span></p>
+                    <p> <span id="incrementTicketNumberOfFirstClass">+</span> <span
+                            id="decrementTicketNumberOfFirstClass">-</span></p>
                 </div>
             </div>
-            
+
             <div class="input-group f-class">
                 <div>
                     <label for="">Economy ($100)</label>
                     <input class="inp-style inp-width" type="number" name="" id="economyClassTicketNumbers">
                 </div>
                 <div class="plus-minus-btn">
-                    <p> <span id="incrementTicketNumberOfEconomyClass">+</span> <span class="decrementTicketNumber">-</span> </p>
+                    <p> <span id="incrementTicketNumberOfEconomyClass">+</span> <span
+                            id="decrementTicketNumberOfEconomyClass">-</span> </p>
                 </div>
             </div>
             <div class="calculations">
@@ -96,43 +98,99 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button class="btn-style" id="bookingButtonAction">Book Now</button>
+            <button class="btn-style" id="bookingErrorButtonAction" style="display: none; background-color: rgb(255, 0, 0);font-size:20px;">Opps! Add a ticket!</button>
+            <button class="btn-style" id="bookedButtonAction" style="display: none; background-color: rgb(83, 245, 78);color: rgb(255, 255, 255); font-size: 20px; font-weight: 600;">Successfully Booked <img src="images/tick.png" alt="" style="width: 20px;"> </button>
         </div>
 
         <div class="booking-content">
             <h1>discover <br> around the world</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise voluptatibus quam</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias
+                veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise
+                voluptatibus quam</p>
         </div>
-    </section>
-    <script>
-        const initialTicketNumber = 0;
-        document.getElementById("firstClassTicketNumbers").value = initialTicketNumber;
-        document.getElementById("economyClassTicketNumbers").value = initialTicketNumber;
-        
-        document.getElementById("incrementTicketNumberOfFirstClass").addEventListener("click", function(){
-            let ticketNumbers = parseFloat(document.getElementById("firstClassTicketNumbers").value);
-            ticketNumbers++;
-            document.getElementById("firstClassTicketNumbers").value = ticketNumbers;
-            let currentTotalPriceForFirstClassTicket = parseFloat(document.getElementById("currentSubTotalAmount").innerText);
-            let newSubTotal = currentTotalPriceForFirstClassTicket + 150;
-            document.getElementById("currentSubTotalAmount").innerText = newSubTotal;
-            let vatOnNewSubTotal = newSubTotal * 0.1;
-            document.getElementById("currentVatAmount").innerText = vatOnNewSubTotal;
-            document.getElementById("currentTotalAmount").innerText = newSubTotal + vatOnNewSubTotal;
-        });
-        document.getElementById("incrementTicketNumberOfEconomyClass").addEventListener("click", function(){
-            let ticketNumbers = parseFloat(document.getElementById("economyClassTicketNumbers").value);
-            ticketNumbers++;
-            document.getElementById("economyClassTicketNumbers").value = ticketNumbers;
-            let currentTotalPriceForEconomyClassTicket = parseFloat(document.getElementById("currentSubTotalAmount").innerText);
-            let newSubTotal = currentTotalPriceForEconomyClassTicket + 100;
-            document.getElementById("currentSubTotalAmount").innerText = newSubTotal;
-            let vatOnNewSubTotal = newSubTotal * 0.1;
-            document.getElementById("currentVatAmount").innerText = vatOnNewSubTotal;
-            document.getElementById("currentTotalAmount").innerText = newSubTotal + vatOnNewSubTotal;
-        });
-    </script>
-    <!--Thank You-->
+        </section>
+        <script>
+            const initialTicketNumber = 0;
+            document.getElementById("firstClassTicketNumbers").value = initialTicketNumber;
+            document.getElementById("economyClassTicketNumbers").value = initialTicketNumber;
+            function buttonPhaseBeforeBooking(){
+                document.getElementById("bookingButtonAction").style.display = "block";
+                document.getElementById("bookedButtonAction").style.display = "none";
+                document.getElementById("bookingErrorButtonAction").style.display = "none";
+            }
+
+            // firstClassActionAndEventHandler
+            document.getElementById("incrementTicketNumberOfFirstClass").addEventListener("click", function () {
+                buttonPhaseBeforeBooking();
+                let ticketNumbers = parseFloat(document.getElementById("firstClassTicketNumbers").value);
+                ticketNumbers++;
+                document.getElementById("firstClassTicketNumbers").value = ticketNumbers;
+                let currentTotalPriceForFirstClassTicket = parseFloat(document.getElementById("currentSubTotalAmount").innerText);
+                let newSubTotal = currentTotalPriceForFirstClassTicket + 150;
+                document.getElementById("currentSubTotalAmount").innerText = newSubTotal;
+                let vatOnNewSubTotal = newSubTotal * 0.1;
+                document.getElementById("currentVatAmount").innerText = vatOnNewSubTotal;
+                document.getElementById("currentTotalAmount").innerText = newSubTotal + vatOnNewSubTotal;
+            });
+
+            document.getElementById("decrementTicketNumberOfFirstClass").addEventListener("click", function () {
+                buttonPhaseBeforeBooking();
+                let ticketNumbers = parseFloat(document.getElementById("firstClassTicketNumbers").value);
+                ticketNumbers--;
+                document.getElementById("firstClassTicketNumbers").value = ticketNumbers;
+                let currentTotalPriceForFirstClassTicket = parseFloat(document.getElementById("currentSubTotalAmount").innerText);
+                let newSubTotal = currentTotalPriceForFirstClassTicket - 150;
+                document.getElementById("currentSubTotalAmount").innerText = newSubTotal;
+                let vatOnNewSubTotal = newSubTotal * 0.1;
+                document.getElementById("currentVatAmount").innerText = vatOnNewSubTotal;
+                document.getElementById("currentTotalAmount").innerText = newSubTotal + vatOnNewSubTotal;
+            });
+
+            // economyClassActionAndEventHandler
+            document.getElementById("incrementTicketNumberOfEconomyClass").addEventListener("click", function () {
+                buttonPhaseBeforeBooking();
+                let ticketNumbers = parseFloat(document.getElementById("economyClassTicketNumbers").value);
+                ticketNumbers++;
+                document.getElementById("economyClassTicketNumbers").value = ticketNumbers;
+                let currentTotalPriceForEconomyClassTicket = parseFloat(document.getElementById("currentSubTotalAmount").innerText);
+                let newSubTotal = currentTotalPriceForEconomyClassTicket + 100;
+                document.getElementById("currentSubTotalAmount").innerText = newSubTotal;
+                let vatOnNewSubTotal = newSubTotal * 0.1;
+                document.getElementById("currentVatAmount").innerText = vatOnNewSubTotal;
+                document.getElementById("currentTotalAmount").innerText = newSubTotal + vatOnNewSubTotal;
+                console.log("hello");
+            });
+
+            document.getElementById("decrementTicketNumberOfEconomyClass").addEventListener("click", function () {
+                buttonPhaseBeforeBooking();
+                let ticketNumbers = parseFloat(document.getElementById("economyClassTicketNumbers").value);
+                ticketNumbers--;
+                document.getElementById("economyClassTicketNumbers").value = ticketNumbers;
+                let currentTotalPriceForEconomyClassTicket = parseFloat(document.getElementById("currentSubTotalAmount").innerText);
+                let newSubTotal = currentTotalPriceForEconomyClassTicket - 100;
+                document.getElementById("currentSubTotalAmount").innerText = newSubTotal;
+                let vatOnNewSubTotal = newSubTotal * 0.1;
+                document.getElementById("currentVatAmount").innerText = vatOnNewSubTotal;
+                document.getElementById("currentTotalAmount").innerText = newSubTotal + vatOnNewSubTotal;
+                console.log("Mello");
+            });
+
+            //bookedButtonActionAndEventHandler
+            document.getElementById("bookingButtonAction").addEventListener("click", function(){
+                if(parseFloat(document.getElementById("currentTotalAmount").innerText) > 0){
+                    document.getElementById("bookingButtonAction").style.display = "none";
+                    document.getElementById("bookedButtonAction").style.display = "block";
+                }else{
+                    document.getElementById("bookingButtonAction").style.display = "none";
+                    document.getElementById("bookingErrorButtonAction").style.display = "block";
+                }
+                
+            });
+
+
+        </script>
+        <!--Thank You-->
 </body>
 
 </html>
