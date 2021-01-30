@@ -100,7 +100,8 @@
             </div>
             <button class="btn-style" id="bookingButtonAction">Book Now</button>
             <button class="btn-style" id="bookingErrorButtonAction" style="display: none; background-color: rgb(255, 0, 0);font-size:20px;">Opps! Add a ticket!</button>
-            <button class="btn-style" id="bookedButtonAction" style="display: none; background-color: rgb(41, 150, 37);color: rgb(255, 255, 255); font-size: 20px; font-weight: 600;">Successfully Booked <img src="images/tick.png" alt="" style="width: 20px;"> </button>
+            <button class="btn-style" id="bookedButtonAction" style="display: none; background-color: rgb(41, 150, 37);color: rgb(255, 255, 255); font-size: 20px; font-weight: 600;">Booking Successful <img src="images/tick.png" alt="" style="width: 20px;"> </button>
+            <button class="btn-style" id="downloadButton"style="display: none; margin-top: 20px;"> <a target="_blank" href="https://www.google.com/"style="text-decoration: none; color: white; font-size: 20px;">Download Ticket</a> </button>
         </div>
 
         <div class="booking-content">
@@ -118,6 +119,7 @@
                 document.getElementById("bookingButtonAction").style.display = "block";
                 document.getElementById("bookedButtonAction").style.display = "none";
                 document.getElementById("bookingErrorButtonAction").style.display = "none";
+                document.getElementById("downloadButton").style.display = "none";
             }
 
             // firstClassActionAndEventHandler
@@ -187,6 +189,7 @@
                 if(parseFloat(document.getElementById("currentTotalAmount").innerText) > 0){
                     document.getElementById("bookingButtonAction").style.display = "none";
                     document.getElementById("bookedButtonAction").style.display = "block";
+                    document.getElementById("downloadButton").style.display = "block";
                 }else{
                     document.getElementById("bookingButtonAction").style.display = "none";
                     document.getElementById("bookingErrorButtonAction").style.display = "block";
